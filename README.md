@@ -23,6 +23,7 @@ FLASK_CONFIG='default'
 DATABASE_URI='database connection to be used'
 SECRET_KEY='random string used for generating token'
 TEST_DB='database to be used for testing'
+SERVER_NAME='server in which app is being tested: `localhost:5000` works.'
 ```
 * After this, you'll need to migrate data schema to the database using the command: `python manage.py create_db`.
 
