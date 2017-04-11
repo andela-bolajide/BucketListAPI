@@ -1,1 +1,1 @@
-recursive-include BucketListAPI/migrations
+include requirements.txt
