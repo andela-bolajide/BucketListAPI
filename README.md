@@ -28,7 +28,9 @@ TEST_DB='database to be used for testing'
 
 ## Testing
 To ensure that your installation is successful you'll need to run tests.
-Enter the command `python manage.py test` in your terminal (or command prompt) to run test.
+TO do this you'll need to configure `tox` to work with the current version of the BucketListAPI, to do this you'll need to enter the command `python setup.py install` in your terminal to setup and install the necessary requirements. Once this is done, you can then run the test using the command `tox`.
+
+Alternatively, you can make use of the command `python manage.py test` to run test.
 
 ## Usage
 * A customized interactive python shell can be accessed by passing the command `python manage.py shell` on your terminal.
