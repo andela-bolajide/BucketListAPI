@@ -3,6 +3,8 @@ This script contains the routes for the different API methods.
 
 This handles the overall routing of the application.
 """
+from datetime import datetime
+
 from flask import g, jsonify, request
 
 from . import main
@@ -61,13 +63,15 @@ def create_bucketlist():
 
     try:
         bucketlist = BucketList(
-            name=request.json.get('name'), created_by=g.user.user_id)
+            name=request.json.get('name'),
+            created_by=g.user.user_id
+        )
         bucketlist.save()
     except (sqlalchemy.exc.IntegrityError, sqlalchemy.exc.InvalidRequestError):
         db.session().rollback()
         return errors.bad_request(
-            "A BucketList with the name {0} exists.").format(
-                request.json.get('name'))
+            "A BucketList with the name {0} exists.".format(
+                request.json.get('name')))
     return bucketlist, 201
 
 
@@ -132,8 +136,9 @@ def add_bucketlist_item(list_id):
         return errors.not_found("The BucketList with the id: {0} doesn't"
                                 " exist.".format(list_id))
 
-    if not request.json or (('name' and 'done') not in request.json):
-        return errors.bad_request("Invalid Input. Only JSON input is allowed.")
+    if not request.json or (('name' or 'done') not in request.json):
+        return errors.bad_request("Only JSON object is accepted.Please confirm"
+                                  " that the key 'name' or 'done' exists.")
 
     item = Items().from_json(request.json)
     item.bucketlist_id = bucketlist.bucketlist_id
