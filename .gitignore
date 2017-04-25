@@ -1,3 +1,15 @@
 *.db
 *.pyc
 __pycache_/
+.DS_Store
+.env
+*.sqlite
+
+*.egg-info
+
+build
+generated
+dist
+
+.tox
+.coverage
